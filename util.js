@@ -81,9 +81,9 @@ const createTables = () => {
         ALTER TABLE 
             attraction ADD CONSTRAINT fk_attraction_park FOREIGN KEY (park_id) REFERENCES park (id);
         ALTER TABLE 
-            journal ADD CONSTRAINT fk_journal_person FOREIGN KEY (person_id) REFERENCES person (id);   
+            journal ADD CONSTRAINT fk_journal_person FOREIGN KEY (person_id) REFERENCES person (id) ON DELETE CASCADE;   
         ALTER TABLE 
-            journal_entry ADD CONSTRAINT fk_journal_entry_journal FOREIGN KEY (journal_id) REFERENCES journal (id);
+            journal_entry ADD CONSTRAINT fk_journal_entry_journal FOREIGN KEY (journal_id) REFERENCES journal (id) ON DELETE CASCADE;
         ALTER TABLE 
             journal_entry ADD CONSTRAINT fk_journal_entry_park FOREIGN KEY (park_id) REFERENCES park (id);
         ALTER TABLE 
