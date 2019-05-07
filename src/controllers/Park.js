@@ -9,6 +9,7 @@ const Park = {
             `INSERT INTO park(id, name, photo, description, date_created, date_modified)
             VALUES($1, $2, $3, $4, $5, $6)
             RETURNING *`;
+
         const values = [
             uuidv4(),
             req.body.name,
@@ -26,7 +27,7 @@ const Park = {
             return res.status(400).send(error);
         }
     },
-    // return park or all parks
+    // return park(s)
     async get(req, res) {
         var query = 
             `SELECT * 
@@ -62,6 +63,7 @@ const Park = {
             SET name=$1,photo=$2,description=$3,date_modified=$4
             WHERE id=$5 
             RETURNING *`;
+
         try {
             const values = [
                 req.body.name,
@@ -90,6 +92,7 @@ const Park = {
         `DELETE FROM park 
         WHERE id=$1 
         RETURNING *`;
+        
         try {
             const { rows } = await db.query(query, [req.params.id]);
 
