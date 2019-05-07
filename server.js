@@ -1,5 +1,6 @@
 import express from 'express';
 import 'babel-polyfill';
+import PersonController from './src/controllers/Person'
 import ParkController from './src/controllers/Park';
 import AttractionController from './src/controllers/Attraction';
 
@@ -9,6 +10,13 @@ const app = express();
 app.use(express.json());
 
 // endpoints
+
+// person
+app.post(apiRoot + '/person', PersonController.create);
+app.get(apiRoot + '/people', PersonController.get);
+app.get(apiRoot + '/person/:id', PersonController.get);
+app.put(apiRoot + '/person/:id', PersonController.update);
+app.delete(apiRoot + '/person/:id', PersonController.delete);
 
 // park
 app.post(apiRoot + '/park', ParkController.create);
