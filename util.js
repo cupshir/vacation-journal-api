@@ -12,6 +12,27 @@ pool.on('connect', () => {
 });
 
 /**
+ * Dev Util Function 
+ */
+const devUtil = () => {
+    const queryText = 
+        `CREATE TABLE IF NOT EXISTS
+        journal_park(
+            id UUID PRIMARY KEY,
+            journal_id UUID NOT NULL,
+            park_id UUID NOT NULL,
+            date_created TIMESTAMP NOT NULL,
+            date_modified TIMESTAMP NOT NULL
+        );
+        ALTER TABLE
+            journal_park ADD CONSTRAINT fk_journal_park_journal FOREIGN KEY (journal_id) REFERENCES journal (id);
+        ALTER TABLE
+            journal_park ADD CONSTRAINT fk_journal_park_park FOREIGN KEY (park_id) REFERENCES park (id);`;
+
+    queryDb(queryText);
+}
+
+/**
  * Create Tables
  */
 const createTables = () => {
@@ -76,6 +97,14 @@ const createTables = () => {
                 date_created TIMESTAMP NOT NULL,
                 date_modified TIMESTAMP NOT NULL
             );
+        CREATE TABLE IF NOT EXISTS
+            journal_park(
+                id UUID PRIMARY KEY,
+                journal_id UUID NOT NULL,
+                park_id UUID NOT NULL,
+                date_created TIMESTAMP NOT NULL,
+                date_modified TIMESTAMP NOT NULL
+            );
         ALTER TABLE 
             person ADD CONSTRAINT fk_person_journal FOREIGN KEY (active_journal_id) REFERENCES journal (id);
         ALTER TABLE 
@@ -87,7 +116,12 @@ const createTables = () => {
         ALTER TABLE 
             journal_entry ADD CONSTRAINT fk_journal_entry_park FOREIGN KEY (park_id) REFERENCES park (id);
         ALTER TABLE 
-            journal_entry ADD CONSTRAINT fk_journal_entry_attraction FOREIGN KEY (attraction_id) REFERENCES attraction (id);`;
+            journal_entry ADD CONSTRAINT fk_journal_entry_attraction FOREIGN KEY (attraction_id) REFERENCES attraction (id);
+        ALTER TABLE
+            journal_park ADD CONSTRAINT fk_journal_park_journal FOREIGN KEY (journal_id) REFERENCES journal (id);
+        ALTER TABLE
+            journal_park ADD CONSTRAINT fk_journal_park_park FOREIGN KEY (park_id) REFERENCES park (id);`;
+            
     queryDb(queryText);
 }
 
@@ -131,9 +165,10 @@ pool.on('remove', () => {
 });
 
 module.exports = {
-  createTables,
-  addConstraints,
-  dropTables
+    devUtil,
+    createTables,
+    addConstraints,
+    dropTables
 };
 
 require('make-runnable');
