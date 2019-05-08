@@ -41,6 +41,9 @@ const Attraction = {
         if (req.params.id) {
             query += " WHERE id = '" + req.params.id + "'";
         }
+        else if (req.query.park_id) {
+            query += " WHERE park_id ='" + req.query.park_id + "'";
+        }
 
         try {
             const { rows, rowCount } = await db.query(query);
