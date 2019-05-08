@@ -51,8 +51,6 @@ const JournalEntry = {
             query += " WHERE journal_id = '" + req.query.journal_id + "'";
         }
 
-        console.log(query);
-
         try {
             const { rows, rowCount } = await db.query(query);
 
