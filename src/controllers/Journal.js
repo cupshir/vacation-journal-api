@@ -38,6 +38,9 @@ const Journal = {
         if (req.params.id) {
             query += " WHERE id = '" + req.params.id + "'";
         }
+        else if (req.query.person_id) {
+            query += " WHERE person_id = '" + req.query.person_id + "'";
+        }
 
         try {
             const { rows, rowCount } = await db.query(query);
