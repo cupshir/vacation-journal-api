@@ -4,6 +4,7 @@ import PersonController from './src/controllers/Person'
 import ParkController from './src/controllers/Park';
 import AttractionController from './src/controllers/Attraction';
 import JournalController from './src/controllers/Journal';
+import JournalEntryController from './src/controllers/JournalEntry';
 
 const apiRoot = '/api/v1';
 const app = express();
@@ -39,6 +40,13 @@ app.get(apiRoot + '/journals', JournalController.get);
 app.get(apiRoot + '/journal/:id', JournalController.get);
 app.put(apiRoot + '/journal/:id', JournalController.update);
 app.delete(apiRoot + '/journal/:id', JournalController.delete);
+
+// journal entry
+app.post(apiRoot + '/journal-entry', JournalEntryController.create);
+app.get(apiRoot + '/journal-entries', JournalEntryController.get);
+app.get(apiRoot + '/journal-entry/:id', JournalEntryController.get);
+app.put(apiRoot + '/journal-entry/:id', JournalEntryController.update);
+app.delete(apiRoot + '/journal-entry/:id', JournalEntryController.delete);
 
 app.get('/', (req, res) => {
   return res.status(200).send({'message': 'Vacation logger api'});
