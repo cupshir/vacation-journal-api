@@ -3,6 +3,7 @@ import 'babel-polyfill';
 import PersonController from './src/controllers/Person'
 import ParkController from './src/controllers/Park';
 import AttractionController from './src/controllers/Attraction';
+import JournalController from './src/controllers/Journal';
 
 const apiRoot = '/api/v1';
 const app = express();
@@ -32,7 +33,12 @@ app.get(apiRoot + '/attraction/:id', AttractionController.get);
 app.put(apiRoot + '/attraction/:id', AttractionController.update);
 app.delete(apiRoot + '/attraction/:id', AttractionController.delete);
 
-
+// journal
+app.post(apiRoot + '/journal', JournalController.create);
+app.get(apiRoot + '/journals', JournalController.get);
+app.get(apiRoot + '/journal/:id', JournalController.get);
+app.put(apiRoot + '/journal/:id', JournalController.update);
+app.delete(apiRoot + '/journal/:id', JournalController.delete);
 
 app.get('/', (req, res) => {
   return res.status(200).send({'message': 'Vacation logger api'});
