@@ -103,7 +103,7 @@ const Person = {
             const { rows } = await db.query(query, [req.params.id]);
 
             if(rows[0]) {
-                return res.status(204).send({ 'message': 'person deleted' });
+                return res.status(200).send({ 'message': 'person deleted' });
             } 
             else {
                 return res.status(404).send({'message': 'person not found'});
